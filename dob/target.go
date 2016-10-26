@@ -1,4 +1,4 @@
-package libdobuild
+package dob
 
 type Target interface {
 	GetDeps() []Target

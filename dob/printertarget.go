@@ -1,6 +1,6 @@
 // libdobuild has the library component of the dobuild library. It defines the
 // language and the default targets
-package libdobuild
+package dob
 
 import "fmt"
 
