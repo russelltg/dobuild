@@ -1,27 +1,24 @@
 package libdobuild
 
-type Target struct {
-	Deps         []*Target
-	Build        func(*Target) bool
-	NeedsRebuild func(*Target) bool
+type Target interface {
+	GetDeps() []Target
+	AddDependencies([]Target)
+	Build() bool
+	NeedsRebuild() bool
 }
 
-func (t *Target) AddDependency(toAdd *Target) {
-	t.Deps = append(t.Deps, toAdd)
-}
+func BuildTarget(t Target) {
 
-func (t *Target) BuildWithDeps() {
-
-	for _, dep := range t.Deps {
-		if dep.NeedsRebuild(t) {
-			res := dep.Build(t)
+	for _, dep := range t.GetDeps() {
+		if dep.NeedsRebuild() {
+			res := dep.Build()
 			if !res {
 				// TODO: way way way better logging
 				panic("Error building dependency!")
 			}
 		}
 	}
-	if t.NeedsRebuild(t) {
-		t.Build(t)
+	if t.NeedsRebuild() {
+		t.Build()
 	}
 }
