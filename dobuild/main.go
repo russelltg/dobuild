@@ -3,11 +3,11 @@ package main
 import "github.com/russelltg/dobuild/libdobuild"
 
 func main() {
-	t := libdobuild.CreatePrinterTarget("Hello!")
-	t2 := libdobuild.CreatePrinterTarget("Hello to you too!")
+	t := libdobuild.NewPrinterTarget("Hello!")
+	t2 := libdobuild.NewPrinterTarget("Hello to you too!")
 
-	t2.AddDependency(t)
+	t2.AddDependencies([]libdobuild.Target{t})
 
-	t2.BuildWithDeps()
+	libdobuild.BuildTarget(t2)
 
 }
