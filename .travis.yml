@@ -7,6 +7,10 @@ go:
   - 1.6
   - 1.7
 
+os:
+  - linux
+  - osx
+
 script:
   - go get ./dobuild
   - go install ./dobuild
